@@ -31,12 +31,10 @@ static int wbinvd_open(struct inode *inode, struct file *file)
 	return  single_open(file,wbinvd_show,NULL);
 }
 
-static const struct file_operations wbinvd_fops = {
-	.owner   = THIS_MODULE,
-	.open    = wbinvd_open,
-	.read    = seq_read,
-	.llseek  = seq_lseek,
-	.release = single_release,
+static const struct proc_ops wbinvd_fops = {
+	.proc_open    = wbinvd_open,
+	.proc_read    = seq_read,
+	.proc_lseek  = seq_lseek,
 };
 
 static int __init wbinvd_init(void)
